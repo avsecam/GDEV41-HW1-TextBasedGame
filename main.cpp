@@ -2,6 +2,13 @@
 #include <fstream>
 
 
+const int OFFSET = 3;
+
+
+void printTwoLines(int width);
+void printHorizontalLine(int width);
+
+
 int main() {
 	std::ifstream settingsFile;
 
@@ -25,4 +32,35 @@ int main() {
 		>> width >> height
 		>> playerStartColumn >> playerStartRow
 		>> enemyStartColumn >> enemyStartRow;
+	
+	// Print grid
+	for (int i = 0; i < height; i++) {
+		printTwoLines(width);
+	}
+	printHorizontalLine(width);
+	
+}
+
+
+void printTwoLines(int width) {
+	std::string secondLine;
+	for (int i = 0; i < (width * OFFSET) + 1; i++) {
+		if (i % 3 == 0) {
+			secondLine += '|';
+		} else {
+			secondLine += ' ';
+		}
+	}
+	printHorizontalLine(width);
+	std::cout << secondLine << '\n';
+}
+
+
+void printHorizontalLine(int width) {
+	std::string horizontalLine;
+	for (int i = 0; i < (width * OFFSET) + 1; i++) {
+		horizontalLine += '-';
+	}
+
+	std::cout << horizontalLine << '\n';
 }
