@@ -5,18 +5,23 @@
 const int OFFSET = 3;
 
 
-void printTwoLines(int width);
+struct Position {
+	int column, row;
+};
+
+
+void printTwoLines(int width, int row, Position playerPosition, Position enemyPosition);
 void printHorizontalLine(int width);
+
 
 
 int main() {
 	std::ifstream settingsFile;
 
 	int width, height;
-	int playerStartColumn, playerStartRow;
-	int enemyStartColumn, enemyStartRow;
+	Position playerStartPosition, enemyStartPosition;
 
-	int playerCurrentColumn, playerCurrentRow;
+	Position playerCurrentPosition, enemyCurrentPosition;
 
 	std::cout << "Text-Based Game\n";
 	
@@ -30,27 +35,40 @@ int main() {
 	}
 	settingsFile
 		>> width >> height
-		>> playerStartColumn >> playerStartRow
-		>> enemyStartColumn >> enemyStartRow;
+		>> playerStartPosition.column >> playerStartPosition.row
+		>> enemyStartPosition.column >> enemyStartPosition.row;
 	
+	playerCurrentPosition = playerStartPosition;
+	enemyCurrentPosition = enemyStartPosition;
+
 	// Print grid
 	for (int i = 0; i < height; i++) {
-		printTwoLines(width);
+		printTwoLines(width, i, playerCurrentPosition, enemyCurrentPosition);
 	}
 	printHorizontalLine(width);
 	
 }
 
 
-void printTwoLines(int width) {
+void printTwoLines(int width, int row, Position playerPosition, Position enemyPosition) {
 	std::string secondLine;
+	
+	// Draw bars and spaces
 	for (int i = 0; i < (width * OFFSET) + 1; i++) {
-		if (i % 3 == 0) {
+		if (i % OFFSET == 0) {
 			secondLine += '|';
 		} else {
 			secondLine += ' ';
 		}
 	}
+
+	if (row == playerPosition.row / 2) {
+		secondLine.replace((playerPosition.column * OFFSET) - 2, 1, "P");
+	}
+	if (row == enemyPosition.row / 2) {
+		secondLine.replace((enemyPosition.column * OFFSET) - 1, 1, "E");
+	}
+
 	printHorizontalLine(width);
 	std::cout << secondLine << '\n';
 }
@@ -61,6 +79,5 @@ void printHorizontalLine(int width) {
 	for (int i = 0; i < (width * OFFSET) + 1; i++) {
 		horizontalLine += '-';
 	}
-
 	std::cout << horizontalLine << '\n';
 }

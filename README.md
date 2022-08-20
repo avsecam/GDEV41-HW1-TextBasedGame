@@ -10,7 +10,7 @@
 	- enemy's starting column
 	- enemy's starting row
 - Sample settings.txt:
-  - 3x3 grid, player starts at (1,1) (bottom left), enemy starts at (3, 2) (right middle)
+  - 3x3 grid, player starts at (0,0) (top left), enemy starts at (2,1) (right middle)
   - ```txt
-	3 3 1 1 3 2
+	3 3 0 0 2 1
 	```
