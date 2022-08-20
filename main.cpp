@@ -46,7 +46,6 @@ int main() {
 		printTwoLines(width, i, playerCurrentPosition, enemyCurrentPosition);
 	}
 	printHorizontalLine(width);
-	
 }
 
 
@@ -62,11 +61,11 @@ void printTwoLines(int width, int row, Position playerPosition, Position enemyPo
 		}
 	}
 
-	if (row == playerPosition.row / 2) {
-		secondLine.replace((playerPosition.column * OFFSET) - 2, 1, "P");
+	if (row == playerPosition.row) {
+		secondLine.replace((playerPosition.column * OFFSET) + 1, 1, "P");
 	}
-	if (row == enemyPosition.row / 2) {
-		secondLine.replace((enemyPosition.column * OFFSET) - 1, 1, "E");
+	if (row == enemyPosition.row) {
+		secondLine.replace((enemyPosition.column * OFFSET) + 2, 1, "E");
 	}
 
 	printHorizontalLine(width);
