@@ -111,10 +111,10 @@ int main() {
 			if (playerCurrentPosition.column == enemyCurrentPosition.column && playerCurrentPosition.row == enemyCurrentPosition.row)
 			{
 				std::cout << "***   ***   *********   ***   ***   ***  ***  ***   *********   ***   ***" << std::endl;
-				std::cout << "***   ***   *********   ***   ***   ***  ***  ***   *********   ***** ***" << std::endl;
-				std::cout << " *******    ***   ***   ***   ***   ***  ***  ***      ***      *** *****" << std::endl;
-				std::cout << "   ***      ***   ***   ***   ***   ***  ***  ***      ***      ***  ****" << std::endl;
-				std::cout << "   ***      *********   *********   *************   *********   ***   ***" << std::endl;
+				std::cout << "***   ***   *********   ***   ***   ***  ***  ***   *********   ****  ***" << std::endl;
+				std::cout << " *******    ***   ***   ***   ***   ***  ***  ***      ***      ***** ***" << std::endl;
+				std::cout << "   ***      ***   ***   ***   ***   ***  ***  ***      ***      *** *****" << std::endl;
+				std::cout << "   ***      *********   *********   *************   *********   ***  ****" << std::endl;
 				std::cout << "   ***      *********   *********   *************   *********   ***   ***" << std::endl;
 				enemyAlive = false;
 			}
