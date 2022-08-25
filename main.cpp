@@ -18,6 +18,8 @@ void printHorizontalLine(int width);
 int main() {
 	std::ifstream settingsFile;
 
+	bool enemyAlive = true;
+
 	int width, height;
 	Position playerStartPosition, enemyStartPosition;
 
@@ -41,11 +43,106 @@ int main() {
 	playerCurrentPosition = playerStartPosition;
 	enemyCurrentPosition = enemyStartPosition;
 
+
 	// Print grid
 	for (int i = 0; i < height; i++) {
 		printTwoLines(width, i, playerCurrentPosition, enemyCurrentPosition);
+		}
+		printHorizontalLine(width);
+	
+	// Game Loop
+	while(enemyAlive)
+	{
+		bool positionChanged = false;
+		std::string playerInput = "";
+
+		std::cin >> playerInput;
+
+		if (playerInput == "north" || playerInput == "n")
+		{
+			if(playerCurrentPosition.row > 0)
+			{
+				playerCurrentPosition.row -= 1;
+			}
+			else
+			{
+				playerCurrentPosition.row = height - 1;
+			}
+			positionChanged = true;
+		}
+		else if (playerInput == "south" || playerInput == "s")
+		{
+			if(playerCurrentPosition.row < height - 1)
+			{
+				playerCurrentPosition.row += 1;
+			}
+			else
+			{
+				playerCurrentPosition.row = 0;
+			}
+			positionChanged = true;
+		}
+		else if (playerInput == "east" || playerInput == "e")
+		{
+			if(playerCurrentPosition.column < width - 1)
+			{
+				playerCurrentPosition.column += 1;
+			}
+			else
+			{
+				playerCurrentPosition.column = 0;
+			}
+			positionChanged = true;
+		}
+		else if (playerInput == "west" || playerInput == "w")
+		{
+			if(playerCurrentPosition.column > 0)
+			{
+				playerCurrentPosition.column -= 1;
+			}
+			else
+			{
+				playerCurrentPosition.column = width - 1;
+			}
+			positionChanged = true;
+		}
+		else if (playerInput == "attack" || playerInput == "a")
+		{
+			if (playerCurrentPosition.column == enemyCurrentPosition.column && playerCurrentPosition.row == enemyCurrentPosition.row)
+			{
+				std::cout << "***   ***   *********   ***   ***   ***  ***  ***   *********   ***   ***" << std::endl;
+				std::cout << "***   ***   *********   ***   ***   ***  ***  ***   *********   ***** ***" << std::endl;
+				std::cout << " *******    ***   ***   ***   ***   ***  ***  ***      ***      *** *****" << std::endl;
+				std::cout << "   ***      ***   ***   ***   ***   ***  ***  ***      ***      ***  ****" << std::endl;
+				std::cout << "   ***      *********   *********   *************   *********   ***   ***" << std::endl;
+				std::cout << "   ***      *********   *********   *************   *********   ***   ***" << std::endl;
+				enemyAlive = false;
+			}
+			else
+			{
+				std::cout << "ATTACK MISSED!!!" << std::endl;
+			}
+		}
+		else if (playerInput == "exit")
+		{
+			std::cout << "Player Left The Game" << std::endl;
+			enemyAlive = false;
+		}
+		else
+		{
+			std::cout << "INVALID COMMAND" << std::endl;
+		}
+
+		if (positionChanged)
+		{
+			for (int i = 0; i < height; i++) {
+			printTwoLines(width, i, playerCurrentPosition, enemyCurrentPosition);
+			}
+			printHorizontalLine(width);
+			std::cout << "" << std::endl;
+		}
 	}
-	printHorizontalLine(width);
+	
 }
 
 
